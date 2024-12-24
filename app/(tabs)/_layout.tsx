@@ -17,7 +17,7 @@ interface TabIconProps {
 type Props = {};
 
 const TabIcon = ({ focused, icon }: TabIconProps) => (
-  <TouchableOpacity>
+  <TouchableOpacity className="flex-1 flex-col pt-3">
     <Image source={icon} />
   </TouchableOpacity>
 );
