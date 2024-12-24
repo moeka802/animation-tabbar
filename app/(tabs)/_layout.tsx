@@ -1,21 +1,32 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import icons from "@/constraints/icons";
+import FloatingTabIcon from "@/components/FloatingTabIcon";
+
+interface TabIconProps {
+  icon: ImageSourcePropType;
+  focused: boolean;
+}
 
 type Props = {};
 
-const TabIcon = ({ focused, icon }) => (
-  <View>
+const TabIcon = ({ focused, icon }: TabIconProps) => (
+  <TouchableOpacity>
     <Image source={icon} />
-  </View>
+  </TouchableOpacity>
 );
 
 const TabLayout = (props: Props) => {
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
         headerShown: false,
       }}
     >
