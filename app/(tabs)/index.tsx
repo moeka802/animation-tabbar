@@ -1,4 +1,4 @@
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
@@ -6,10 +6,10 @@ import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 type Props = {};
 
 const Home = (props: Props) => {
-  const width = useSharedValue(100);
+  const translateX = useSharedValue(0);
 
   const handlePress = () => {
-    width.value = withSpring(width.value + 50);
+    translateX.value = withSpring(translateX.value + 50);
   };
   return (
     <SafeAreaView>
@@ -17,11 +17,7 @@ const Home = (props: Props) => {
         <Text className="pt-10 pb-5">Home</Text>
 
         <Animated.View
-          style={{
-            width,
-            height: 100,
-            backgroundColor: "violet",
-          }}
+          style={[styles.box, { transform: [{ translateX }] }]}
         ></Animated.View>
 
         <Button onPress={handlePress} title="Click me" />
@@ -29,5 +25,13 @@ const Home = (props: Props) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  box: {
+    width: 100,
+    height: 100,
+    backgroundColor: "violet",
+  },
+});
 
 export default Home;
