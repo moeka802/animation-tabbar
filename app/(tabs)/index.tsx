@@ -1,37 +1,31 @@
-import { Text, View, Button, StyleSheet } from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, Text } from "react-native";
+import React, { useRef } from "react";
+import { useEvent } from "expo";
+import { useVideoPlayer, VideoView } from "expo-video";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-  withRepeat,
-  withTiming,
-  withSequence,
-} from "react-native-reanimated";
+
+const videoSource =
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
 type Props = {};
 
 const Home = (props: Props) => {
-  const rotation = useSharedValue(0);
+  const player = useVideoPlayer(videoSource, (player) => {
+    player.loop = true;
+    player.play();
+  });
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateZ: `${30}deg` }],
-  }));
-
-  const handlePress = () => {};
   return (
-    <SafeAreaView className="flex-1 h-full flex justify-center items-center px-5 ">
-      <Text className="pt-10 pb-5 text-3xl font-bold">Home</Text>
+    <SafeAreaView className="flex-1 h-full flex justify-center items-center px-5">
+      <VideoView player={player} style={styles.videoContainer} />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  box: {
-    width: 100,
-    height: 100,
-    backgroundColor: "violet",
+  videoContainer: {
+    width: 350,
+    height: 275,
   },
 });
 
