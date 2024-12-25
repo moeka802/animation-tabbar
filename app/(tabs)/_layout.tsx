@@ -8,7 +8,12 @@ import React from "react";
 import { Tabs } from "expo-router";
 import icons from "@/constraints/icons";
 import FloatingTabIcon from "@/components/FloatingTabIcon";
-import Animated, { useAnimatedStyle } from "react-native-reanimated";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from "react-native-reanimated";
 
 interface TabIconProps {
   icon: ImageSourcePropType;
@@ -18,13 +23,22 @@ interface TabIconProps {
 type Props = {};
 
 const TabIcon = ({ focused, icon }: TabIconProps) => {
+  const rotation = useSharedValue(0);
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateZ: `${20}deg` }],
+    transform: [{ rotateZ: `${rotation.value}deg` }],
   }));
+
+  const handlePress = () => {
+    rotation.value = withRepeat(withTiming(20), 2, true);
+  };
+
   return (
-    <TouchableOpacity className="flex-1 flex-col pt-3">
+    <TouchableOpacity
+      className="flex flex-1 flex-col pt-3 items-center justify-center"
+      onPress={handlePress}
+    >
       <Animated.View style={animatedStyle}>
-        <Image source={icon} />
+        <Image source={icon} className="size-6" />
       </Animated.View>
     </TouchableOpacity>
   );
