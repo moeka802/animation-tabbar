@@ -13,19 +13,19 @@ import Animated, {
 type Props = {};
 
 const Home = (props: Props) => {
-  const translateX = useSharedValue(0);
+  const rotation = useSharedValue(0);
 
-  const handlePress = () => {
-    translateX.value = withSpring(translateX.value + 50);
-  };
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotateZ: `${30}deg` }],
+  }));
+
+  const handlePress = () => {};
   return (
     <SafeAreaView>
       <View className="px-5">
         <Text className="pt-10 pb-5">Home</Text>
 
-        <Animated.View
-          style={[styles.box, { transform: [{ translateX }] }]}
-        ></Animated.View>
+        <Animated.View style={[styles.box, animatedStyle]}></Animated.View>
 
         <Button onPress={handlePress} title="Click me" />
       </View>
