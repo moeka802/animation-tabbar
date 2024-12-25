@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useRef } from "react";
 import { useEvent } from "expo";
 import { useVideoPlayer, VideoView } from "expo-video";
@@ -15,9 +15,34 @@ const Home = (props: Props) => {
     player.play();
   });
 
+  const { isPlaying } = useEvent(player, "playingChange", {
+    isPlaying: player.playing,
+  });
+
+  const handlePlayerButton = () => {
+    if (isPlaying) {
+      player.pause();
+    } else {
+      player.play();
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 h-full flex justify-center items-center px-5">
-      <VideoView player={player} style={styles.videoContainer} />
+      <VideoView
+        player={player}
+        style={styles.videoContainer}
+        allowsFullscreen
+        allowsPictureInPicture
+      />
+      <TouchableOpacity
+        onPress={handlePlayerButton}
+        className="w-full flex flex-row items-center justify-center bg-blue-300 mt-6 py-3 rounded-full shadow-md shadow-zinc-300"
+      >
+        <Text className="text-white text-lg text-center">
+          {isPlaying ? "Pause" : "Play"}
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
