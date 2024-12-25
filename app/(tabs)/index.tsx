@@ -21,14 +21,8 @@ const Home = (props: Props) => {
 
   const handlePress = () => {};
   return (
-    <SafeAreaView>
-      <View className="px-5">
-        <Text className="pt-10 pb-5">Home</Text>
-
-        <Animated.View style={[styles.box, animatedStyle]}></Animated.View>
-
-        <Button onPress={handlePress} title="Click me" />
-      </View>
+    <SafeAreaView className="flex-1 h-full flex justify-center items-center px-5 ">
+      <Text className="pt-10 pb-5 text-3xl font-bold">Home</Text>
     </SafeAreaView>
   );
 };
