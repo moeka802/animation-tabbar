@@ -1,7 +1,14 @@
 import { Text, View, Button, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withRepeat,
+  withTiming,
+  withSequence,
+} from "react-native-reanimated";
 
 type Props = {};
 
